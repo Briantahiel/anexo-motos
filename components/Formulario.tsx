@@ -170,9 +170,7 @@ export default function Formulario({
       <div className="flex justify-end">
   <InstallButton />
 </div>    
-       <p className="text-center text-xs text-gray-400 mt-4 opacity-0 animate-fadeUp delay-500 transition-all duration-300 hover:text-gray-600">
-          Developed by Brian Gómez · Cetrogar Zárate
-        </p> 
+       
       </form>
    
     </div>
