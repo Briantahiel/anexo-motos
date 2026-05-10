@@ -4,7 +4,31 @@ import { FormData } from "@/lib/types"
 import AnexoM1 from "./documentos/AnexoM1"
 import AnexoM2 from "./documentos/AnexoM2"
 import DeclaracionPage1 from "./documentos/DeclaracionPage1"
-import DeclaracionPage2 from "./documentos/DeclaracionPage2"
+
+
+type Html2PdfOptions = {
+  margin: number
+  filename: string
+  image: { type: string; quality: number }
+  html2canvas: { scale: number }
+  jsPDF: {
+    unit: string
+    format: string
+    orientation: string
+  }
+  pagebreak: {
+    mode: string[]
+    before: string
+  }
+}
+
+type Html2Pdf = () => {
+  set: (options: Html2PdfOptions) => {
+    from: (element: HTMLElement) => {
+      save: () => void
+    }
+  }
+}
 
 type PreviewProps = {
   data: FormData
@@ -17,7 +41,7 @@ const descargarPDF = async () => {
   const elemento = document.getElementById("documentos")
   if (!elemento) return
 
-  const html2pdf = (await import("html2pdf.js")).default
+  const html2pdf = (await import("html2pdf.js")).default as Html2Pdf
 
   html2pdf()
     .set({
@@ -34,7 +58,7 @@ const descargarPDF = async () => {
         mode: ["css"],
         before: ".page:not(:first-child)",
       },
-    } as any)
+    })
     .from(elemento)
     .save()
 }
@@ -51,8 +75,7 @@ const descargarPDF = async () => {
       <div id="documentos">
         <div className="page"><AnexoM1 data={data} /></div>
         <div className="page"><AnexoM2 data={data} /></div>
-        <div className="page"><DeclaracionPage1 data={data} /></div>
-        <div className="page"><DeclaracionPage2 data={data} /></div>
+        <div className="page page-declaracion"><DeclaracionPage1 data={data} /></div>
       </div>
 
     </div>

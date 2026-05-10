@@ -2,14 +2,24 @@
 
 import { useEffect, useState } from "react"
 
+type BeforeInstallPromptChoice = {
+  outcome: "accepted" | "dismissed"
+  platform: string
+}
+
+type BeforeInstallPromptEvent = Event & {
+  prompt: () => Promise<void>
+  userChoice: Promise<BeforeInstallPromptChoice>
+}
+
 export default function InstallButton() {
-  const [prompt, setPrompt] = useState<any>(null)
+  const [prompt, setPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const handler = (e: any) => {
-      e.preventDefault()
-      setPrompt(e)
+    const handler = (event: Event) => {
+      event.preventDefault()
+      setPrompt(event as BeforeInstallPromptEvent)
       setVisible(true)
     }
 
@@ -21,7 +31,7 @@ export default function InstallButton() {
   const handleInstall = async () => {
     if (!prompt) return
 
-    prompt.prompt()
+    await prompt.prompt()
     const choice = await prompt.userChoice
 
     if (choice.outcome === "accepted") {

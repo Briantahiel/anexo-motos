@@ -203,3 +203,53 @@ ul {
   font-size: 12px;
   margin-top: 4px;
 }
+
+/* Declaración jurada compacta en una sola hoja */
+.declaracion-doc {
+  font-size: 11pt;
+  line-height: 1.32;
+}
+
+.declaracion-header {
+  margin-bottom: 12px;
+}
+
+.declaracion-fecha {
+  margin-bottom: 12px;
+}
+
+.declaracion-datos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+  margin-bottom: 12px;
+}
+
+.declaracion-datos-grid p {
+  margin: 0 0 3px;
+}
+
+.declaracion-subtitulo {
+  margin-bottom: 12px;
+}
+
+.declaracion-doc .parrafo {
+  margin-bottom: 10px;
+  text-indent: 28px;
+}
+
+.declaracion-doc .condiciones {
+  margin-bottom: 10px;
+}
+
+.declaracion-doc .condiciones li {
+  margin-bottom: 4px;
+}
+
+.declaracion-firma-final {
+  margin-top: 28px;
+}
+
+.page-declaracion {
+  padding: 10mm 12mm;
+}
